@@ -1,9 +1,8 @@
-import { useState } from "react";
 
 const SearchBar = ({ handleSubmit, searchInput, setSearchInput }) => {
 
   return (
-    <form onSubmit={(e) => handleSubmit(e, searchInput)}>
+    <form className='search-bar' onSubmit={(e) => handleSubmit(e, searchInput)}>
       <input
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}

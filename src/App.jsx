@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import BookCard from "./components/BookCard";
 import SearchBar from "./components/SearchBar";
+import SearchResults from "./components/SearchResults";
 import "./App.css";
 
 function App() {
@@ -41,9 +41,9 @@ function App() {
   }, [searchTerm, maxResults]);
 
   const handleSubmit = (e, term) => {
+    e.preventDefault();
     setBooks([]);
     setIsLoading(true);
-    e.preventDefault();
     setSearchTerm(term);
   };
 
@@ -54,11 +54,7 @@ function App() {
         setSearchInput={setSearchInput}
         searchInput={searchInput}
       />
-      <div className="card-container">
-        {books &&
-          books.map((book, index) => <BookCard key={index} book={book} />)}
-        {isLoading && <p>Loading...</p>}
-      </div>
+      <SearchResults books={books} isLoading={isLoading} />
     </>
   );
 }
