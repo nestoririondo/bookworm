@@ -5,20 +5,17 @@ const SearchBar = () => {
   const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState("");
 
-  const handleSubmit = (event, search) => {
-    if (!search) {
-      event.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!searchInput) {
       return;
     }
-    event.preventDefault();
-    navigate(`/search/${search}`);
+    navigate(`/search/${searchInput}`);
+    setSearchInput("");
   };
 
   return (
-    <form
-      className="search-bar"
-      onSubmit={(event) => handleSubmit(event, searchInput)}
-    >
+    <form className="search-bar" onSubmit={handleSubmit}>
       <input
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
