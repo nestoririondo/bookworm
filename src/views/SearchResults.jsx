@@ -11,32 +11,36 @@ const SearchResults = () => {
   const [totalItems, setTotalItems] = useState(0);
   const [startIndex, setStartIndex] = useState(0);
 
-  const fetchBooks = async () => {
+  const fetchBooks = async (append = false) => {
     setIsLoading(true);
-    const response = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${search}&startIndex=${startIndex}`
-    );
     try {
-      setBooks([...books, ...response.data.items]);
+      const response = await axios.get(
+        `https://www.googleapis.com/books/v1/volumes?q=${search}&startIndex=${startIndex}`
+      );
+      if (append) {
+        setBooks((prevBooks) => [...prevBooks, ...response.data.items]);
+      } else {
+        setBooks(response.data.items);
+      }
       setTotalItems(response.data.totalItems);
     } catch (error) {
       console.log(error);
     } finally {
       setIsLoading(false);
-      console.log(response.data);
     }
   };
 
   useEffect(() => {
     if (search) {
       setBooks([]);
+      setStartIndex(0);
       fetchBooks();
     }
   }, [search]);
 
   useEffect(() => {
     if (startIndex > 0) {
-      fetchBooks();
+      fetchBooks(true);
     }
   }, [startIndex]);
 
@@ -59,7 +63,7 @@ const SearchResults = () => {
           {!isLoading && books.length === 0 && (
             <div className="no-data">No data</div>
           )}
-          {books.length < totalItems ? (
+          {books.length < totalItems && !isLoading ? (
             <button className="load-more-btn" onClick={loadMore}>
               Load more
             </button>
