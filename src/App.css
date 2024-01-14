@@ -42,21 +42,27 @@ body {
     }
   }
 }
+
 .search-results {
   .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 1rem;
     padding: 1rem;
     max-width: 1200px;
     margin: 0 auto;
     .card {
+      cursor: pointer;
       max-width: 400px;
       background-color: #fff;
       border-radius: 5px;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       overflow: hidden;
       text-align: center;
+      &:hover {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        transform: scale(1.02);
+      }
       img {
         width: 100%;
         object-fit: cover;
@@ -69,6 +75,7 @@ body {
       padding: 1rem;
       font-size: 1.5rem;
       color: #555;
+      animation: blink 500ms infinite;
     }
     .no-data {
       display: flex;
@@ -97,5 +104,16 @@ body {
         transform: scale(0.98);
       }
     }
+  }
+}
+@keyframes blink {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
   }
 }

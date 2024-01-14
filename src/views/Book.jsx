@@ -4,20 +4,32 @@ import axios from "axios";
 
 const Book = () => {
   const [book, setBook] = useState(null);
+  const [author, setAuthor] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const { id } = useParams();
+  let { key } = useParams();
+
   const navigate = useNavigate();
 
   const fetchBook = async () => {
-    const response = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes/${id}`
-    );
     try {
+      const response = await axios.get(
+        `https://openlibrary.org/works/${key}.json`
+      );
       setBook(response.data);
+      console.log(response.data);
+      const authorKey = response.data.authors[0].author.key;
+      try {
+        const secondResponse = await axios.get(
+          `https://openlibrary.org${authorKey}.json`
+        );
+        setAuthor(secondResponse.data);
+      } catch (error) {
+        console.log(error);
+      }
     } catch (error) {
       console.log(error);
-      setBook(null)
+      setBook(null);
     } finally {
       setLoading(false);
     }
@@ -31,15 +43,15 @@ const Book = () => {
     <>
       {loading ? (
         <div className="loading">Loading...</div>
-      ) : !loading && !book ? (
+      ) : !loading && !book && !author ? (
         <div className="no-data">No data</div>
       ) : (
         <>
-          <div>{book.volumeInfo.title}</div>
-          <div>{book.volumeInfo.authors}</div>
+          <div>{book.title}</div>
+          <div>{author.personal_name}</div>
           <img
-            src={book.volumeInfo.imageLinks.medium ? book.volumeInfo.imageLinks.medium : book.volumeInfo.imageLinks.thumbnail}
-            alt={book.volumeInfo.title}
+            src={`http://covers.openlibrary.org/b/id/${book.covers[0]}-L.jpg`}
+            alt={book.title}
           />
           <button onClick={() => navigate(-1)}>Back</button>
         </>

@@ -1,5 +1,4 @@
 import SearchBar from "../components/SearchBar";
-import SearchResults from "./SearchResults";
 
 const Home = () => {
 

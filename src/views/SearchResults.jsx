@@ -9,20 +9,20 @@ const SearchResults = () => {
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [totalItems, setTotalItems] = useState(0);
-  const [startIndex, setStartIndex] = useState(0);
+  const [page, setPage] = useState(1);
 
   const fetchBooks = async (append = false) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes?q=${search}&startIndex=${startIndex}`
+        `https://openlibrary.org/search.json?q=${search}&page=${page}&limit=10`
       );
       if (append) {
-        setBooks((prevBooks) => [...prevBooks, ...response.data.items]);
+        setBooks([...books, ...response.data.docs]);
       } else {
-        setBooks(response.data.items);
+        setBooks(response.data.docs);
       }
-      setTotalItems(response.data.totalItems);
+      setTotalItems(response.data.numFound);
     } catch (error) {
       console.log(error);
     } finally {
@@ -32,21 +32,22 @@ const SearchResults = () => {
 
   useEffect(() => {
     if (search) {
+      setPage(1);
       setBooks([]);
-      setStartIndex(0);
       fetchBooks();
     }
   }, [search]);
 
   useEffect(() => {
-    if (startIndex > 0) {
+    if (page > 1) {
       fetchBooks(true);
     }
-  }, [startIndex]);
+  }, [page]);
 
   const loadMore = () => {
-    setStartIndex(startIndex + 10);
+    setPage(page + 1);
   };
+
   return (
     <>
       <SearchBar />
@@ -55,7 +56,7 @@ const SearchResults = () => {
           {books && (
             <>
               {books.map((book) => (
-                <BookCard key={book.id} book={book} />
+                <BookCard key={book.key} book={book} />
               ))}
             </>
           )}

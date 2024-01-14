@@ -3,18 +3,28 @@ import { useNavigate } from "react-router-dom";
 const BookCard = ({ book }) => {
   const navigate = useNavigate();
 
-  const { title, authors } = book.volumeInfo;
+  let { title, author_name, cover_edition_key } = book;
 
-  const image = book.volumeInfo?.imageLinks
-    ? book.volumeInfo.imageLinks.small ?? book.volumeInfo.imageLinks.thumbnail
-    : "https://via.placeholder.com/150";
-    
+  title = title.length > 40 ? title.slice(0, 40) + "..." : title;
+
+  const image =
+    `https://covers.openlibrary.org/b/olid/${cover_edition_key}-M.jpg`
+      ? `https://covers.openlibrary.org/b/olid/${cover_edition_key}-M.jpg`
+      : `https://covers.openlibrary.org/b/olid/${cover_edition_key}-S.jpg`
+      ? `https://covers.openlibrary.org/b/olid/${cover_edition_key}-S.jpg`
+      : null;
+
   return (
     <>
-      <div className="card" onClick={() => navigate(`/book/${book.id}`)}>
-        <img src={image} alt={title} />
-        <div>{title}</div>
-        <div>{authors}</div>
+      <div className="card" onClick={() => navigate(`${book.key}`)}>
+        <img
+          src={image ? image : `https://via.placeholder.com/300}`}
+          alt={title}
+        />
+        <div className="card-title">
+          <h4>{title}</h4>
+          <div>{author_name}</div>
+        </div>
       </div>
     </>
   );

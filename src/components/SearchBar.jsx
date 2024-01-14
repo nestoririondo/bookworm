@@ -22,6 +22,7 @@ const SearchBar = () => {
       <input
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
+        placeholder="Search for book, author, genre..."
       />
       <button type="submit">Search</button>
     </form>
