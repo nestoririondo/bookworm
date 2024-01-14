@@ -76,7 +76,7 @@ const Book = () => {
               <div className="description-text">{description}</div>
             </div>
           </div>
-          <button onClick={() => navigate(-1)}>Back</button>
+          <button className="back-btn" onClick={() => navigate(-1)}>Back</button>
         </>
       )}
     </>

@@ -64,12 +64,12 @@ const SearchResults = () => {
           {!isLoading && books.length === 0 && (
             <div className="no-data">No data</div>
           )}
-          {books.length < totalItems && !isLoading ? (
-            <button className="load-more-btn" onClick={loadMore}>
-              Load more
-            </button>
-          ) : null}
         </div>
+        {books.length < totalItems && !isLoading ? (
+          <button className="load-more-btn" onClick={loadMore}>
+            Load more
+          </button>
+        ) : null}
       </div>
     </>
   );
