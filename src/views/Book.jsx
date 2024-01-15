@@ -67,7 +67,11 @@ const Book = () => {
         <>
           <div className="book">
             <img
-              src={`http://covers.openlibrary.org/b/id/${book.covers[0]}-L.jpg`}
+              src={
+                book && book.covers && book.covers[0]
+                  ? `http://covers.openlibrary.org/b/id/${book.covers[0]}-L.jpg`
+                  : "https://via.placeholder.com/300x500"
+              }
               alt={book.title}
             />
             <div className="description">

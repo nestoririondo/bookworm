@@ -10,7 +10,6 @@ const SearchResults = () => {
   const query = searchParams.get("q") || "";
   const navigate = useNavigate();
 
-
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [totalItems, setTotalItems] = useState(0);
@@ -21,15 +20,16 @@ const SearchResults = () => {
   const fetchBooks = async () => {
     setIsLoading(true);
     try {
+      const encodedQuery = encodeURIComponent(query);
       const response = await axios.get(
-        `https://openlibrary.org/search.json?q=${query}&page=${page}&limit=10&sort=${sort}`
+        `https://openlibrary.org/search.json?q=${encodedQuery}&page=${page}&limit=10&sort=${sort}`
       );
       if (append) {
         setBooks([...books, ...response.data.docs]);
       } else {
         setBooks(response.data.docs);
       }
-      console.log(response.data.docs)
+      console.log(response.data.docs);
       setTotalItems(response.data.numFound);
     } catch (error) {
       console.log(error);
@@ -48,16 +48,15 @@ const SearchResults = () => {
   };
 
   const handleSearch = (query) => {
+    const encodedQuery = encodeURIComponent(query);
     setBooks([]);
     setAppend(false);
-    navigate(`/search?q=${query}`);
+    navigate(`/search?q=${encodedQuery}`);
   };
 
   return (
     <>
-      <SearchBar
-        handleSearch={handleSearch}
-      />
+      <SearchBar handleSearch={handleSearch} />
       <Filter setSort={setSort} setBooks={setBooks} />
       <div className="search-results">
         <div className="card-container">
