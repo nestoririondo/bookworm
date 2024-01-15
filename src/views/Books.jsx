@@ -1,27 +1,35 @@
 import BookCard from "../components/BookCard";
 import SearchBar from "../components/SearchBar";
-import { useParams } from "react-router-dom";
+import Filter from "../components/Filter";
 import { useState, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const SearchResults = () => {
-  const { search } = useParams();
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("q") || "";
+  const navigate = useNavigate();
+
+
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [totalItems, setTotalItems] = useState(0);
   const [page, setPage] = useState(1);
+  const [append, setAppend] = useState(false);
+  const [sort, setSort] = useState("rating");
 
-  const fetchBooks = async (append = false) => {
+  const fetchBooks = async () => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `https://openlibrary.org/search.json?q=${search}&page=${page}&limit=10`
+        `https://openlibrary.org/search.json?q=${query}&page=${page}&limit=10&sort=${sort}`
       );
       if (append) {
         setBooks([...books, ...response.data.docs]);
       } else {
         setBooks(response.data.docs);
       }
+      console.log(response.data.docs)
       setTotalItems(response.data.numFound);
     } catch (error) {
       console.log(error);
@@ -31,26 +39,26 @@ const SearchResults = () => {
   };
 
   useEffect(() => {
-    if (search) {
-      setPage(1);
-      setBooks([]);
-      fetchBooks();
-    }
-  }, [search]);
-
-  useEffect(() => {
-    if (page > 1) {
-      fetchBooks(true);
-    }
-  }, [page]);
+    fetchBooks();
+  }, [query, page, sort]);
 
   const loadMore = () => {
+    setAppend(true);
     setPage(page + 1);
+  };
+
+  const handleSearch = (query) => {
+    setBooks([]);
+    setAppend(false);
+    navigate(`/search?q=${query}`);
   };
 
   return (
     <>
-      <SearchBar />
+      <SearchBar
+        handleSearch={handleSearch}
+      />
+      <Filter setSort={setSort} setBooks={setBooks} />
       <div className="search-results">
         <div className="card-container">
           {books && (

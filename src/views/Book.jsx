@@ -4,13 +4,12 @@ import axios from "axios";
 import SearchBar from "../components/SearchBar";
 
 const Book = () => {
+  const { key } = useParams();
+  const navigate = useNavigate();
+
   const [book, setBook] = useState(null);
   const [author, setAuthor] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  let { key } = useParams();
-
-  const navigate = useNavigate();
 
   const fetchBook = async () => {
     try {
@@ -31,7 +30,6 @@ const Book = () => {
       }
     } catch (error) {
       console.log(error);
-      setBook(null);
     } finally {
       setLoading(false);
     }
@@ -54,9 +52,13 @@ const Book = () => {
       : `${book.description.slice(0, 500)}...`;
   }
 
+  const handleSearch = (query) => {
+    navigate(`/search?q=${query}`);
+  };
+
   return (
     <>
-      <SearchBar />
+      <SearchBar handleSearch={handleSearch} />
       {loading ? (
         <div className="loading">Loading...</div>
       ) : !loading && !book && !author ? (
@@ -76,7 +78,9 @@ const Book = () => {
               <div className="description-text">{description}</div>
             </div>
           </div>
-          <button className="back-btn" onClick={() => navigate(-1)}>Back</button>
+          <button className="back-btn" onClick={() => navigate(-1)}>
+            Back
+          </button>
         </>
       )}
     </>

@@ -4,7 +4,7 @@ const BookCard = ({ book }) => {
   const navigate = useNavigate();
 
   let { title, author_name, cover_edition_key } = book;
-
+  author_name = author_name ? author_name[0] : "Unknown";
   title = title.length > 40 ? title.slice(0, 40) + "..." : title;
 
   const image =

@@ -1,15 +1,14 @@
-import SearchResults from "./views/SearchResults";
 import Book from "./views/Book";
-import Home from "./views/Home";
+import Books from "./views/Books";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 const App = () => {
   return (
     <>
       <Routes>
-        <Route index element={<Home />} />
-        <Route path="/search/:search" element={<SearchResults />} />
+        <Route index element={<Navigate to="/search?q=the" />} />
+        <Route path="/search" element={<Books />} />
         <Route path="/works/:key" element={<Book />} />
       </Routes>
     </>
