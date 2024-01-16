@@ -17,14 +17,14 @@ const Book = () => {
         `https://openlibrary.org/works/${key}.json`
       );
       setBook(response.data);
-      console.log(response.data);
+      console.log("Book:", response.data);
       const authorKey = response.data.authors[0].author.key;
       try {
-        const secondResponse = await axios.get(
+        const response = await axios.get(
           `https://openlibrary.org${authorKey}.json`
         );
-        setAuthor(secondResponse.data);
-        console.log(secondResponse.data);
+        setAuthor(response.data);
+        console.log("Author:", response.data);
       } catch (error) {
         console.log(error);
       }

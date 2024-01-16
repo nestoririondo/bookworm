@@ -14,21 +14,15 @@ const SearchResults = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [totalItems, setTotalItems] = useState(0);
   const [page, setPage] = useState(1);
-  const [append, setAppend] = useState(false);
   const [sort, setSort] = useState("rating");
 
   const fetchBooks = async () => {
     setIsLoading(true);
     try {
-      const encodedQuery = encodeURIComponent(query);
       const response = await axios.get(
-        `https://openlibrary.org/search.json?q=${encodedQuery}&page=${page}&limit=10&sort=${sort}`
+        `https://openlibrary.org/search.json?q=${query}&page=${page}&limit=10&sort=${sort}`
       );
-      if (append) {
-        setBooks([...books, ...response.data.docs]);
-      } else {
-        setBooks(response.data.docs);
-      }
+      setBooks((prevState) => [...prevState, ...response.data.docs]);
       console.log(response.data.docs);
       setTotalItems(response.data.numFound);
     } catch (error) {
@@ -43,15 +37,12 @@ const SearchResults = () => {
   }, [query, page, sort]);
 
   const loadMore = () => {
-    setAppend(true);
     setPage(page + 1);
   };
 
   const handleSearch = (query) => {
-    const encodedQuery = encodeURIComponent(query);
     setBooks([]);
-    setAppend(false);
-    navigate(`/search?q=${encodedQuery}`);
+    navigate(`/search?q=${query}`);
   };
 
   return (
