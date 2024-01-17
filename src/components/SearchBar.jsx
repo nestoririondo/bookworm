@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const handleSearch = (query, setBooks, navigate) => {
+const handleSearch = (currentQuery, newQuery, setBooks, navigate) => {
+  if (currentQuery === newQuery) return;
+
   setBooks([]);
-  navigate(`/search?q=${query}`);
+  navigate(`/search?q=${newQuery}`);
 };
 
-const SearchBar = ({ setBooks }) => {
+const SearchBar = ({ setBooks, currentQuery }) => {
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
 
@@ -15,7 +17,7 @@ const SearchBar = ({ setBooks }) => {
 
     if (!searchInput) return;
 
-    handleSearch(searchInput, setBooks, navigate);
+    handleSearch(currentQuery, searchInput, setBooks, navigate);
     setSearchInput("");
   };
 

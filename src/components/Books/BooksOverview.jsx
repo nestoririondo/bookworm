@@ -33,7 +33,7 @@ export const BooksOverview = ({ query }) => {
   }, [query, page, sort]);
 
   return <>
-    <SearchBar setBooks={setBooks} />
+    <SearchBar setBooks={setBooks} currentQuery={query} />
     <Filter setSort={setSort} setBooks={setBooks} />
     <div className="search-results">
       <BookList books={books} isLoading={isLoading} />
