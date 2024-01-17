@@ -1,18 +1,16 @@
 import { useNavigate } from "react-router-dom";
+import { addTrailingDots } from "../utils/string";
+import { OPENLIBRARY_COVERS_BASE_URL } from "../constants/openlibrary";
 
 const BookCard = ({ book }) => {
   const navigate = useNavigate();
 
   let { title, author_name, cover_edition_key } = book;
-  author_name = author_name ? author_name[0] : "Unknown";
-  title = title.length > 40 ? title.slice(0, 40) + "..." : title;
-
-  const image =
-    `https://covers.openlibrary.org/b/olid/${cover_edition_key}-M.jpg`
-      ? `https://covers.openlibrary.org/b/olid/${cover_edition_key}-M.jpg`
-      : `https://covers.openlibrary.org/b/olid/${cover_edition_key}-S.jpg`
-      ? `https://covers.openlibrary.org/b/olid/${cover_edition_key}-S.jpg`
-      : null;
+  
+  const shortTitle = addTrailingDots(title, 40);
+  const authorName = author_name ? author_name[0] : "Unknown";
+  
+  const image = `${OPENLIBRARY_COVERS_BASE_URL}/${cover_edition_key}-M.jpg`;
 
   return (
     <>
@@ -22,8 +20,8 @@ const BookCard = ({ book }) => {
           alt={title}
         />
         <div className="card-title">
-          <h4>{title}</h4>
-          <div>{author_name}</div>
+          <h4>{shortTitle}</h4>
+          <div>{authorName}</div>
         </div>
       </div>
     </>
