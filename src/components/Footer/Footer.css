@@ -1,0 +1,38 @@
+a {
+  color: #fff;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.footer {
+  height: 3.75rem;
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  .footer__inside {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    .footer__inside__right {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      img {
+        width: 25px;
+        height: 25px;
+        filter: invert(1);
+        &:hover {
+          filter: invert(0.5);
+        }
+      }
+    }
+  }
+}

@@ -2,13 +2,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SearchBar.css";
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ onSearch, prevQuery }) => {
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!searchInput) {
+      return;
+    }
+    if (prevQuery === searchInput) {
+      setSearchInput("");
       return;
     }
     if (onSearch) onSearch();

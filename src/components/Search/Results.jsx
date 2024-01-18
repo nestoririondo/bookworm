@@ -2,9 +2,10 @@ import LoadMoreButton from "../LoadMoreButtons/LoadMoreButton";
 import BookCard from "../BookCard/BookCard";
 import "./Results.css";
 
-const Results = ({books, isLoading, totalItems}) => {
+const Results = ({ books, isLoading, totalItems, setPage, page, query }) => {
   return (
     <div className="search-results">
+      {books.length > 0 && <div className="results-query">Search results for <span>{query}</span></div>}
       <div className="card-container">
         {books && (
           <>

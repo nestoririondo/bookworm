@@ -5,6 +5,7 @@ import axios from "axios";
 import SearchBar from "../components/SearchBar/SearchBar";
 import BookDetail from "../components/BookDetail/BookDetail";
 import BackButton from "../components/BackButton/BackButton";
+import Footer from "../components/Footer/Footer";
 
 const fetchBook = async (key, setBook, setAuthor, setLoading) => {
   try {
@@ -44,15 +45,18 @@ const Book = () => {
 
   return (
     <>
-      <SearchBar />
-      {loading ? (
-        <div className="loading">Loading...</div>
-      ) : !loading && !book && !author ? (
-        <div className="no-data">No data</div>
-      ) : (
-        <BookDetail book={book} author={author} />
-      )}
-      <BackButton goBack={() => navigate(-1)} />
+      <div className="body">
+        <SearchBar />
+        {loading ? (
+          <div className="loading">Loading...</div>
+        ) : !loading && !book && !author ? (
+          <div className="no-data">No data</div>
+        ) : (
+          <BookDetail book={book} author={author} />
+        )}
+        <BackButton goBack={() => navigate(-1)} />
+      </div>
+      <Footer />
     </>
   );
 };
