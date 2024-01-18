@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { addTrailingDots } from "../utils/string";
-import { OPENLIBRARY_COVERS_BASE_URL } from "../constants/openlibrary";
+import { addTrailingDots } from "../../utils/string";
+import { OPENLIBRARY_COVERS_BASE_URL } from "../../constants/openlibrary";
+import "./BookCard.css";
 
 const BookCard = ({ book }) => {
   const navigate = useNavigate();

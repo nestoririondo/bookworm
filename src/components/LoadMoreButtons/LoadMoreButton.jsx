@@ -1,3 +1,5 @@
+import "./LoadMoreButton.css";
+
 const LoadMoreButton = ({ isShown, loadMore }) => {
   if (!isShown) return null;
   return (

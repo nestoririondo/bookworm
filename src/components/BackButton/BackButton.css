@@ -1,0 +1,18 @@
+.back-btn {
+    display: block;
+    margin: 2rem auto;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    background-color: #39af90;
+    color: #fff;
+    &:hover {
+      background-color: #2f8971;
+    }
+    &:active {
+      background-color: #1c5546;
+      transform: scale(0.98);
+    }
+  }

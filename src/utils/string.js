@@ -1,6 +1,6 @@
 const addTrailingDots = (str, maxLen) => {
   if (str.length <= maxLen) return str;
-  return `${str.slice(maxLen)}...`;
+  return `${str.slice(0,maxLen)}...`;
 };
 export { addTrailingDots };
 

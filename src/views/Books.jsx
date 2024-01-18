@@ -1,11 +1,10 @@
-import BookCard from "../components/BookCard";
-import SearchBar from "../components/SearchBar";
-import Filter from "../components/Filter";
-import LoadMoreButton from "../components/LoadMoreButton";
 import { OPENLIBRARY_BASE_URL } from "../constants/openlibrary";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
+import SearchBar from "../components/SearchBar/SearchBar";
+import Filter from "../components/Filter/Filter";
+import Results from "../components/Results/Results";
 
 const fetchBooks = async (
   setBooks,
@@ -28,7 +27,7 @@ const fetchBooks = async (
   }
 };
 
-const SearchResults = () => {
+const Books = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
 
@@ -44,29 +43,16 @@ const SearchResults = () => {
 
   return (
     <>
-      <SearchBar onSearch={()=>setBooks([])} />
+      <SearchBar onSearch={() => setBooks([])} />
       <Filter setSort={setSort} setBooks={setBooks} />
-      <div className="search-results">
-        <div className="card-container">
-          {books && (
-            <>
-              {books.map((book) => (
-                <BookCard key={book.key} book={book} />
-              ))}
-            </>
-          )}
-          {isLoading && <div className="loading">Loading...</div>}
-          {!isLoading && books.length === 0 && (
-            <div className="no-data">No data</div>
-          )}
-        </div>
-        <LoadMoreButton
-          isShown={books.length < totalItems && !isLoading}
-          loadMore={() => setPage(page + 1)}
-        />
-      </div>
+      <Results
+        books={books}
+        isLoading={isLoading}
+        totalItems={totalItems}
+        setPage={setPage}
+      />
     </>
   );
 };
 
-export default SearchResults;
+export default Books;

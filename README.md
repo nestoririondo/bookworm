@@ -17,7 +17,7 @@ This React app uses the Open Library API to search for books and display the res
 
 2. Install the dependencies
 
-`cd yourrepository`
+`cd bookworm`
 
 `npm install`
 

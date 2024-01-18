@@ -1,3 +1,5 @@
+import "./BackButton.css";
+
 const BackButton = ({goBack}) => {
   return (
     <button className="back-btn" onClick={goBack}>

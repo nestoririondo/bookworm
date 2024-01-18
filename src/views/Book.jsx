@@ -2,9 +2,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { OPENLIBRARY_BASE_URL } from "../constants/openlibrary";
 import axios from "axios";
-import SearchBar from "../components/SearchBar";
-import BookDetail from "../components/BookDetail";
-import BackButton from "../components/BackButton";
+import SearchBar from "../components/SearchBar/SearchBar";
+import BookDetail from "../components/BookDetail/BookDetail";
+import BackButton from "../components/BackButton/BackButton";
 
 const fetchBook = async (key, setBook, setAuthor, setLoading) => {
   try {

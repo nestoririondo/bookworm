@@ -1,5 +1,6 @@
-import { addTrailingDots } from "../utils/string";
-import { getYear } from "../utils/string";
+import { addTrailingDots } from "../../utils/string";
+import { getYear } from "../../utils/string";
+import "./BookDetail.css";
 
 const BookDetail = ({ book, author }) => {
   let year =

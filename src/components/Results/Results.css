@@ -1,0 +1,39 @@
+.search-results {
+  .card-container {
+    display: grid;
+    padding: 0 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    .no-data {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      font-size: 1.5rem;
+      color: #555;
+    }
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  font-size: 1.5rem;
+  color: #555;
+  animation: blink 500ms infinite;
+}
+@keyframes blink {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
