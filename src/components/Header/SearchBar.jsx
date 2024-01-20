@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./SearchBar.css";
+import { IoSearch } from "react-icons/io5";import "./SearchBar.css";
 
-const SearchBar = ({ onSearch, prevQuery }) => {
+const SearchBar = ({ prevQuery, clearBooks, setClearBooks }) => {
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ const SearchBar = ({ onSearch, prevQuery }) => {
       setSearchInput("");
       return;
     }
-    if (onSearch) onSearch();
+    setClearBooks(true);
     navigate(`/search?q=${searchInput}`);
     setSearchInput("");
   };
@@ -25,9 +25,9 @@ const SearchBar = ({ onSearch, prevQuery }) => {
       <input
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
-        placeholder="Search for book, author, genre..."
+        placeholder="Search..."
       />
-      <button type="submit">Search</button>
+      <button type="submit"><IoSearch /></button>
     </form>
   );
 };

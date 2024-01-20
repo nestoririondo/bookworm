@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { OPENLIBRARY_BASE_URL } from "../constants/openlibrary";
 import axios from "axios";
-import SearchBar from "../components/SearchBar/SearchBar";
+import Header from "../components/Header/Header";
 import BookDetail from "../components/BookDetail/BookDetail";
 import BackButton from "../components/BackButton/BackButton";
 import Footer from "../components/Footer/Footer";
@@ -38,6 +38,7 @@ const Book = () => {
   const [book, setBook] = useState(null);
   const [author, setAuthor] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [clearBooks, setClearBooks] = useState(true); // This is a hack to clear the books when navigating back from the book detail page
 
   useEffect(() => {
     fetchBook(key, setBook, setAuthor, setLoading);
@@ -45,8 +46,8 @@ const Book = () => {
 
   return (
     <>
+      <Header clearBooks={clearBooks} setClearBooks={setClearBooks}/>
       <div className="body">
-        <SearchBar />
         {loading ? (
           <div className="loading">Loading...</div>
         ) : !loading && !book && !author ? (

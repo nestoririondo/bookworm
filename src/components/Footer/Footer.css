@@ -2,7 +2,7 @@ a {
   color: #fff;
   text-decoration: none;
   &:hover {
-    text-decoration: underline;
+    color: var(--primary-color);
   }
 }
 
@@ -25,12 +25,14 @@ a {
       display: flex;
       gap: 1rem;
       align-items: center;
-      img {
-        width: 25px;
-        height: 25px;
-        filter: invert(1);
-        &:hover {
-          filter: invert(0.5);
+      a {
+        .github-icon {
+          width: 25px;
+          height: 25px;
+          filter: invert(1);
+          &:hover {
+            filter: invert(0.5);
+          }
         }
       }
     }

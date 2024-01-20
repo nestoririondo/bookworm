@@ -1,5 +1,3 @@
-import "./Filter.css"
-
 const Filter = ({ setSort, setBooks }) => {
   const handleSort = (e) => {
     setBooks([]);

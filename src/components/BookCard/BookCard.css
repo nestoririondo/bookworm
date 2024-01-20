@@ -51,7 +51,7 @@
     border-radius: 5px;
     outline: none;
     cursor: pointer;
-    background-color: #39af90;
+    background-color: var(--primary-color);
     color: #fff;
     font-size: 0.75rem;
     margin-top: auto;
@@ -61,6 +61,15 @@
     &:active {
       background-color: #1c5546;
       transform: scale(0.98);
+    }
+  }
+  .remove {
+    background-color: #ce3d32;
+    &:hover {
+      background-color: #b13232;
+    }
+    &:active {
+      background-color: #871b1b;
     }
   }
 }

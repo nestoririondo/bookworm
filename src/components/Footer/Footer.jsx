@@ -14,7 +14,7 @@ const Footer = () => {
             <a href="http://www.nestoririondo.com">Néstor Iriondo</a>
           </p>
           <a href="https://github.com/nestoririondo">
-            <img src={github_icon} alt="github icon" />
+            <img className="github-icon" src={github_icon} alt="github icon" />
           </a>
         </div>
       </div>

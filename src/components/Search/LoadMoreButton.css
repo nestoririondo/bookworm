@@ -1,12 +1,13 @@
 .load-more-btn {
   display: block;
-  margin: 4rem auto;
+  margin: 0 auto;
+  margin-bottom: 4rem;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 5px;
   outline: none;
   cursor: pointer;
-  background-color: #39af90;
+  background-color: var(--primary-color);
   color: #fff;
   &:hover {
     background-color: #2f8971;

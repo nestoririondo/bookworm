@@ -4,7 +4,7 @@ import { OPENLIBRARY_COVERS_BASE_URL } from "../../constants/openlibrary";
 import "./BookCard.css";
 import StarRating from "../StarRating";
 
-const BookCard = ({ book, setFavorites }) => {
+const BookCard = ({ book, setFavorites, favorites }) => {
   const navigate = useNavigate();
 
   let {
@@ -13,21 +13,23 @@ const BookCard = ({ book, setFavorites }) => {
     cover_edition_key,
     first_publish_year,
     ratings_average,
+    key,
   } = book;
 
   const shortTitle = addTrailingDots(title, 40);
   const authorName = author_name ? author_name[0] : "Unknown";
+  const bookKey = key.slice(7, key.length)
 
   const image = `${OPENLIBRARY_COVERS_BASE_URL}/${cover_edition_key}-M.jpg`;
 
-  const addToFavorite = (event, id) => {
+  const addToFavorite = (event) => {
     event.stopPropagation();
     setFavorites((prev) => {
-      const bookId = id.slice(7, id.length);
-      if (!prev.includes(bookId)) {
-        return [...prev, bookId];
+      if (!prev.includes(bookKey)) {
+        return [...prev, bookKey];
       } else {
-        return prev;
+        const newArray = prev.filter((item) => item !== bookKey);
+        return newArray;
       }
     });
   };
@@ -48,12 +50,12 @@ const BookCard = ({ book, setFavorites }) => {
           </div>
           <div className="description"></div>
           <button
-            className="add-btn"
+            className={!favorites.includes(bookKey) ? "add add-btn" : "remove add-btn"}
             onClick={(event) => {
-              addToFavorite(event, book.key);
+              addToFavorite(event);
             }}
           >
-            Add to favorites
+            {!favorites.includes(bookKey) ? "Add to favorites" : "Remove from favorites"}
           </button>
         </div>
       </div>
