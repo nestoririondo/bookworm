@@ -2,15 +2,19 @@ import LoadMoreButton from "../LoadMoreButtons/LoadMoreButton";
 import BookCard from "../BookCard/BookCard";
 import "./Results.css";
 
-const Results = ({ books, isLoading, totalItems, setPage, page, query }) => {
+const Results = ({ books, isLoading, totalItems, setPage, page, query, setFavorites }) => {
   return (
     <div className="search-results">
-      {books.length > 0 && <div className="results-query">Search results for <span>{query}</span></div>}
+      {books.length > 0 && (
+        <div className="results-query">
+          Search results for <span>{query}</span>
+        </div>
+      )}
       <div className="card-container">
         {books && (
           <>
             {books.map((book) => (
-              <BookCard key={book.key} book={book} />
+              <BookCard key={book.key} book={book} setFavorites={setFavorites}/>
             ))}
           </>
         )}

@@ -1,20 +1,72 @@
-.card {
-  cursor: pointer;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  transition: all 0.15s ease-in-out;
-  &:hover {
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
-    transform: scale(1.02);
-  }
-  img {
+.book-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  .card {
+    position: relative;
     width: 100%;
-    aspect-ratio: 2/3;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: all 0.15s ease-in-out;
+    &:hover {
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+      transform: scale(1.02);
+    }
+    img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      display: block;
+      border-radius: 5px;
+    }
+    .card-title {
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      padding: 0.5rem;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.75);
+      transition: opacity 0.15s ease-in-out;
+      .author {
+        margin-top: 20%;
+      }
+      .title {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+    }
   }
-  .card-title {
+  .add-btn {
     padding: 0.5rem;
-    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    background-color: #39af90;
+    color: #fff;
+    font-size: 0.75rem;
+    margin-top: auto;
+    &:hover {
+      background-color: #2f8971;
+    }
+    &:active {
+      background-color: #1c5546;
+      transform: scale(0.98);
+    }
   }
+}
+.card:hover .card-title {
+  opacity: 1;
+}
+.book-btn:hover .add-btn {
+  display: block;
 }

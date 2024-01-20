@@ -32,6 +32,7 @@ const Search = ({ query }) => {
   const [totalItems, setTotalItems] = useState(0);
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState("rating");
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     fetchBooks(setBooks, setTotalItems, setIsLoading, { query, page, sort });
@@ -49,6 +50,7 @@ const Search = ({ query }) => {
           setPage={setPage}
           page={page}
           query={query}
+          setFavorites={setFavorites}
         />
       </div>
     </>
