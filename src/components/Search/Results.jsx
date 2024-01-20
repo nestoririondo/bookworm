@@ -34,7 +34,10 @@ const Results = ({ query, clearBooks, setClearBooks }) => {
   const [totalItems, setTotalItems] = useState(0);
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState("rating");
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(() => {
+    const savedFavorites = localStorage.getItem("favorites");
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
 
   useEffect(() => {
     if (clearBooks) {
@@ -43,6 +46,10 @@ const Results = ({ query, clearBooks, setClearBooks }) => {
     }
     fetchBooks(setBooks, setTotalItems, setIsLoading, { query, page, sort });
   }, [query, page, sort]);
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
   return (
     <div className="body">

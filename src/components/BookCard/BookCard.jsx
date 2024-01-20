@@ -18,7 +18,7 @@ const BookCard = ({ book, setFavorites, favorites }) => {
 
   const shortTitle = addTrailingDots(title, 40);
   const authorName = author_name ? author_name[0] : "Unknown";
-  const bookKey = key.slice(7, key.length)
+  const bookKey = key.slice(7, key.length);
 
   const image = `${OPENLIBRARY_COVERS_BASE_URL}/${cover_edition_key}-M.jpg`;
 
@@ -36,7 +36,10 @@ const BookCard = ({ book, setFavorites, favorites }) => {
 
   return (
     <div className="book-btn">
-      <div className="card" onClick={() => navigate(`${book.key}`)}>
+      <div
+        className={!favorites.includes(bookKey) ? "card" : "card favorite"}
+        onClick={() => navigate(`${book.key}`)}
+      >
         <img
           src={image ? image : `https://via.placeholder.com/300}`}
           alt={title}
@@ -50,12 +53,16 @@ const BookCard = ({ book, setFavorites, favorites }) => {
           </div>
           <div className="description"></div>
           <button
-            className={!favorites.includes(bookKey) ? "add add-btn" : "remove add-btn"}
+            className={
+              !favorites.includes(bookKey) ? "add add-btn" : "remove add-btn"
+            }
             onClick={(event) => {
               addToFavorite(event);
             }}
           >
-            {!favorites.includes(bookKey) ? "Add to favorites" : "Remove from favorites"}
+            {!favorites.includes(bookKey)
+              ? "Add to favorites"
+              : "Remove from favorites"}
           </button>
         </div>
       </div>
