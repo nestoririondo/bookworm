@@ -1,4 +1,3 @@
-
 header {
   height: 4.25rem;
   background-color: #222;
@@ -18,10 +17,11 @@ header {
         color: var(--primary-color);
       }
     }
-    .header__mybooks{
+    .header__mybooks {
       cursor: pointer;
       &:hover {
         color: var(--primary-color);
+      }
     }
   }
 }
