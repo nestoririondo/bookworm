@@ -10,7 +10,7 @@ const Header = ({ prevQuery, clearBooks, setClearBooks }) => {
         <h1 className="header__title" onClick={() => navigate("/")}>
           BookWorm
         </h1>
-        <div>My Books</div>
+        <div className="header__mybooks" onClick={()=>navigate("/mybooks")}>My Books</div>
         <SearchBar
           prevQuery={prevQuery}
           clearBooks={clearBooks}

@@ -35,7 +35,7 @@ const Results = ({ query, clearBooks, setClearBooks }) => {
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState("rating");
   const [favorites, setFavorites] = useState(() => {
-    const savedFavorites = localStorage.getItem("favorites");
+    const savedFavorites = localStorage.getItem("localFavorites");
     return savedFavorites ? JSON.parse(savedFavorites) : [];
   });
 
@@ -48,7 +48,7 @@ const Results = ({ query, clearBooks, setClearBooks }) => {
   }, [query, page, sort]);
 
   useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
+    localStorage.setItem("localFavorites", JSON.stringify(favorites));
   }, [favorites]);
 
   return (

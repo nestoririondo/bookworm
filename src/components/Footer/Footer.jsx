@@ -13,7 +13,7 @@ const Footer = () => {
             Developed by{" "}
             <a href="http://www.nestoririondo.com">Néstor Iriondo</a>
           </p>
-          <a href="https://github.com/nestoririondo">
+          <a href="https://github.com/nestoririondo/bookworm">
             <img className="github-icon" src={github_icon} alt="github icon" />
           </a>
         </div>
