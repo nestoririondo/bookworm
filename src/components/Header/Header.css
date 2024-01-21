@@ -19,9 +19,14 @@ header {
     }
     .header__mybooks {
       cursor: pointer;
+      transition: all 0.15s ease-in-out; 
       &:hover {
         color: var(--primary-color);
       }
+    }
+    .add-animation {
+      color: var(--primary-color);
+      font-weight: bold;
     }
   }
 }

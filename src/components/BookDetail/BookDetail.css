@@ -28,6 +28,10 @@
       .author {
         font-size: 1.2rem;
         color: #666;
+        &:hover {
+          color: var(--primary-color);
+          cursor: pointer;
+        }
       }
       .description-text {
         font-size: 1rem;

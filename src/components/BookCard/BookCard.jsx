@@ -32,6 +32,11 @@ const BookCard = ({ book, setFavorites, favorites }) => {
         return newArray;
       }
     });
+    const myBooks = document.querySelector(".header__mybooks");
+    myBooks.classList.add("add-animation");
+    setTimeout(() => {
+      myBooks.classList.remove("add-animation");
+    }, 200);
   };
 
   return (
@@ -61,8 +66,8 @@ const BookCard = ({ book, setFavorites, favorites }) => {
             }}
           >
             {!favorites.includes(bookKey)
-              ? "Add to favorites"
-              : "Remove from favorites"}
+              ? "Add to My Books"
+              : "Remove from My Books"}
           </button>
         </div>
       </div>

@@ -1,12 +1,13 @@
 import { addTrailingDots } from "../../utils/string";
 import { getYear } from "../../utils/string";
+import { useNavigate } from "react-router-dom";
 import "./BookDetail.css";
 
 const BookDetail = ({ book, author }) => {
+  const navigate = useNavigate();
+
   let year =
-    book && book.first_publish_date
-      ? getYear(book.first_publish_date)
-      : "";
+    book && book.first_publish_date ? getYear(book.first_publish_date) : "";
 
   let description = "No description available";
 
@@ -16,6 +17,9 @@ const BookDetail = ({ book, author }) => {
       : addTrailingDots(book.description, 500);
   }
 
+  const handleClickAuthor = () => {
+    navigate(`/search?q=${author.name}`);
+  };
   return (
     <>
       <div className="book">
@@ -31,7 +35,9 @@ const BookDetail = ({ book, author }) => {
           <div className="title">
             {book.title} {year}
           </div>
-          <div className="author">{author.name}</div>
+          <div className="author" onClick={handleClickAuthor}>
+            {author.name}
+          </div>
           <div className="description-text">{description}</div>
         </div>
       </div>

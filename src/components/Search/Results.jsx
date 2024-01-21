@@ -10,12 +10,13 @@ const fetchBooks = async (
   setBooks,
   setTotalItems,
   setIsLoading,
-  queryParams
+  queryParams,
+  searchType = "q"
 ) => {
   setIsLoading(true);
   try {
     const response = await axios.get(
-      `${OPENLIBRARY_BASE_URL}/search.json?q=${queryParams.query}&page=${queryParams.page}&limit=10&sort=${queryParams.sort}`
+      `${OPENLIBRARY_BASE_URL}/search.json?${searchType}=${queryParams.query}&page=${queryParams.page}&limit=10&sort=${queryParams.sort}`
     );
     setBooks((prevState) => [...prevState, ...response.data.docs]);
     console.log(response.data.docs);
