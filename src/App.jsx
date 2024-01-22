@@ -1,3 +1,4 @@
+import Home from "./views/Home";
 import Book from "./views/Book";
 import Search from "./views/Search";
 import MyBooks from "./views/MyBooks";
@@ -8,7 +9,7 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route index element={<Navigate to="/search?q=the" />} />
+        <Route index element={<Home />} />
         <Route path="/search" element={<Search />} />
         <Route path="/mybooks" element={<MyBooks />}/>
         <Route path="/works/:key" element={<Book />} />

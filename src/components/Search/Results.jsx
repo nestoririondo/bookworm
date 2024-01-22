@@ -53,7 +53,7 @@ const Results = ({ query, clearBooks, setClearBooks }) => {
   }, [favorites]);
 
   return (
-    <div className="body">
+    <>
       <div className="search-above">
         {books.length > 0 && (
           <div className="results-query">
@@ -87,7 +87,7 @@ const Results = ({ query, clearBooks, setClearBooks }) => {
           loadMore={() => setPage(page + 1)}
         />
       </div>
-    </div>
+    </>
   );
 };
 
