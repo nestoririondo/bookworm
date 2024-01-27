@@ -1,9 +1,9 @@
 import { OPENLIBRARY_BASE_URL } from "../../constants/openlibrary";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Filter from "./Filter";
 import LoadMoreButton from "./LoadMoreButton";
 import BookCard from "../BookCard/BookCard";
+import TopRow from "./TopRow";
 import "./Results.css";
 
 const fetchBooks = async (
@@ -35,10 +35,6 @@ const Results = ({ query, clearBooks, setClearBooks }) => {
   const [totalItems, setTotalItems] = useState(0);
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState("rating");
-  const [favorites, setFavorites] = useState(() => {
-    const savedFavorites = localStorage.getItem("localFavorites");
-    return savedFavorites ? JSON.parse(savedFavorites) : [];
-  });
 
   useEffect(() => {
     if (clearBooks) {
@@ -48,32 +44,15 @@ const Results = ({ query, clearBooks, setClearBooks }) => {
     fetchBooks(setBooks, setTotalItems, setIsLoading, { query, page, sort });
   }, [query, page, sort]);
 
-  useEffect(() => {
-    localStorage.setItem("localFavorites", JSON.stringify(favorites));
-  }, [favorites]);
-
   return (
     <>
-      <div className="search-above">
-        {books.length > 0 && (
-          <div className="results-query">
-            Search results for <span>{query}</span>
-          </div>
-        )}
-        <span></span>
-        <Filter setSort={setSort} setBooks={setBooks} />
-      </div>
+      <TopRow query={query} setSort={setSort} setBooks={setBooks} books={books}/>
       <div className="search-results">
         <div className="card-container">
           {books && (
             <>
               {books.map((book) => (
-                <BookCard
-                  key={book.key}
-                  book={book}
-                  setFavorites={setFavorites}
-                  favorites={favorites}
-                />
+                <BookCard key={book.key} book={book} />
               ))}
             </>
           )}
